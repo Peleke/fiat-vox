@@ -1,0 +1,28 @@
+project:
+  type: book
+  output-dir: _book
+
+book:
+  title: "Equivalences"
+  author: "Peleke"
+  repo-url: https://github.com/Peleke/equivalences
+  repo-actions: [source, issue]
+  chapters:
+    - index.qmd
+    - 01-vowels-formants.ipynb
+    - 02-spectral-analysis-dft.ipynb
+    - 03-stft-spectrograms.ipynb
+    - 04-model-training.ipynb
+    - 05-shift-invariance-circulants.ipynb
+  appendices:
+    - references.ipynb
+
+# Notebooks render from their stored outputs; nothing executes at build time.
+execute:
+  enabled: false
+
+format:
+  html:
+    theme: cosmo
+    toc: true
+    code-fold: false

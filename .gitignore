@@ -1,0 +1,12 @@
+_book/
+.quarto/
+/.ipynb_checkpoints/
+**/.ipynb_checkpoints/
+__pycache__/
+.venv/
+.DS_Store
+# Hillenbrand data: local symlink to ../ling/data, not redistributed
+/data
+
+/.quarto/
+**/*.quarto_ipynb
