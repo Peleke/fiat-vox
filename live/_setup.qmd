@@ -1,0 +1,47 @@
+<!-- Live Strudel/Hydra support. Include once per chapter, before any editor,
+     with Quarto's include shortcode pointing at live/_setup.qmd.
+     Then per example: a ```{=html}``` block with <strudel-editor> with the pattern inside an HTML comment.
+     For Hydra, put <div class="hydra-slot"></div> above the editor and start the code with
+       await initHydra({ src: 'https://unpkg.com/hydra-synth@1.4.0' })
+     Chrome only for Hydra; Safari loses the WebGL context (upstream, 2026-10-20). -->
+
+```{=html}
+<script src="https://unpkg.com/@strudel/repl@1.3.0"></script>
+<style>
+  .strudel-controls { display:flex; gap:.5rem; margin:.5rem 0 1.5rem; }
+  .strudel-controls button {
+    font: 500 .85rem 'Inter', sans-serif; padding:.35rem 1rem; border-radius:999px;
+    border:1px solid #e5d9c5; background:#f8f5ef; color:#4a4843; cursor:pointer;
+  }
+  .strudel-controls button.play { background:#9a2520; border-color:#9a2520; color:#fdfcfa; }
+  .strudel-controls button:hover { filter:brightness(.95); }
+  .hydra-slot { aspect-ratio:16/9; border-radius:.375rem; overflow:hidden; background:#0f0f0e; }
+</style>
+<script>
+  // <strudel-editor> ships no transport UI; add play/stop under each one.
+  // Its editor (StrudelMirror) is inserted as the element's next sibling.
+  window.addEventListener('load', () => {
+    document.querySelectorAll('strudel-editor').forEach((el) => {
+      const bar = document.createElement('div');
+      bar.className = 'strudel-controls';
+      const play = Object.assign(document.createElement('button'), { className: 'play', textContent: '▶ Play' });
+      const stop = Object.assign(document.createElement('button'), { textContent: '■ Stop' });
+      play.onclick = () => el.editor?.evaluate();
+      stop.onclick = () => el.editor?.stop();
+      bar.append(play, stop);
+      (el.nextElementSibling ?? el).after(bar);
+    });
+  });
+
+  // initHydra() creates #hydra-canvas as a fixed full-window layer on <body>.
+  // Move it into the page's .hydra-slot. Pixel size still follows the window.
+  new MutationObserver((_, obs) => {
+    const c = document.getElementById('hydra-canvas');
+    const slot = document.querySelector('.hydra-slot');
+    if (!c || !slot) return;
+    c.style.cssText = 'display:block; width:100%; height:100%; pointer-events:none;';
+    slot.append(c);
+    obs.disconnect();
+  }).observe(document.body, { childList: true });
+</script>
+```

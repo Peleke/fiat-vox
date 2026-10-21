@@ -4,25 +4,34 @@ project:
 
 book:
   title: "Equivalences"
-  author: "Peleke"
+  author: "Peleke Sengstacke"
   repo-url: https://github.com/Peleke/equivalences
   repo-actions: [source, issue]
   chapters:
     - index.qmd
-    - 01-vowels-formants.ipynb
-    - 02-spectral-analysis-dft.ipynb
-    - 03-stft-spectrograms.ipynb
-    - 04-model-training.ipynb
-    - 05-shift-invariance-circulants.ipynb
+    - 01-space-time.qmd
+    - 02-waves.qmd
+    - 03-ensembles.qmd
+    - 04-sampling-dft.ipynb
+    - 05-stft-spectrograms.ipynb
+    - 06-isoclines.ipynb
+    - 07-whats-in-a-wave.qmd
+    - 08-what-odin-knew.qmd
   appendices:
-    - references.ipynb
+    - references.qmd
 
-# Notebooks render from their stored outputs; nothing executes at build time.
+# .ipynb chapters render from their stored outputs (Quarto does not execute notebooks by default).
+# .qmd chapters execute locally and are frozen: commit _freeze/ so CI renders without Python.
 execute:
-  enabled: false
+  freeze: auto
 
 format:
   html:
-    theme: cosmo
+    theme: [litera, theme/equivalences.scss]
     toc: true
-    code-fold: false
+    code-fold: true
+    code-summary: "Code"
+    code-overflow: wrap
+    highlight-style: github
+    reference-location: margin
+    citation-location: margin

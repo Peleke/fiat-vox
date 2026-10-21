@@ -1,0 +1,41 @@
+---
+title: "Third's Eye View: What Odin Knew"
+---
+
+A larger section than we'll fill out completely, now: Later, leads with animal communication in general; [Menzerath's law](https://pmc.ncbi.nlm.nih.gov/articles/PMC13013142/) and [recursion](https://www.science.org/doi/10.1126/sciadv.abq3356) in Corvids; [combinatorial syntax in _Parus minor_](https://journals.plos.org/plosbiology/article?id=10.1371/journal.pbio.2006532).
+
+For now, jumps immediately into sperm whales.
+
+## Sperm Whale Speech & Culture: Beguš, Sharma, Rus, et al., 2021-2026
+
+An overview of the field we're transitioning to.
+
+The earlier content covers, in fair breadth and depth, the prerequisite, undergraduate math; DSP basics; phonetics; and DL, to begin studying bioacoustics and sperm whales. We start with an overview of the work of the authors listed, reviewing specifically the history of discoveries on phonological structure in sperm whale communications, from Begus's early results with GANs (which we'll revisit in the mechinterp content later) to his group's more recent work on coda types and structure, and formants; and Sharma + Rus's work from 2024 on the larger-than-expected coda inventory uncovered then. Brief notes on WhAM, before we transition to deep-diving a study that we can now reproduce using everything we've learned.
+
+## Detecting Clicks with CNNs: Bermant et al., 2019
+
+An introduction to one of the first applications of deep learning to sperm whale bioacoustics. We review the work of [Bermant et al.](https://www.nature.com/articles/s41598-019-48909-4), studying their [CNN implementation](https://github.com/dgruber212/Sperm_Whale_Machine_Learning/blob/master/CNNDetector.py) in Keras and re-implementing it in Torch.
+
+We'll reproduce the CNN results, make some observations, and study what we see in light of the more recent research.
+
+## Classifying Codas with RNNs: Bermant et al., 2019
+
+Introduce RNNs; reproduce the paper's results; compare to recent studies.
+
+## Graph Representations of Spectrograms: Aironi et al., 2022
+
+## Augmenting BirdNET with GNNs: Noumida et al., 2026
+
+Study the [Noumida result](https://pubs.aip.org/asa/jasa/article-abstract/159/4/3598/3387731/Spectrogram-derived-graphs-and-inductive-learning?redirectedFrom=fulltext) from earlier this year that used Aironi et al.'s methods to improve BirdNET.
+
+## Enhancing Bermant with GNNs
+
+Extend PyG with DP methods implementing Aironi's feature extraction; augment Bermant's CNN architecture; build a Noumida et al.-inspired GAN; test it against Bermant's benchmarks.
+
+The goal is, explicitly, _not_ to achieve a breakthrough result. Instead, it's to demonstrate how to
+- Read and implement methods from research
+- Build and execute novel models
+- _Hopefully_ demonstrate an improvement
+- ...But otherwise, explain we'll use these tools again to effect now that we have the foundations (to be fair, "we had to send a PR to PyG because the tooling's too new" is a reasonable excuse for a fairly toy-level implementation).
+
+The PyG PR is the main win here, along with the flex of sweeping papers for breakfast; rushing to this is high priority, as an OS contribution would be a massive hiring signal.

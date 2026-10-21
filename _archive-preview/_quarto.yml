@@ -1,0 +1,12 @@
+# Single-page preview of the frozen signals notebook (port 4848). Not part of the book.
+project:
+  type: default
+execute:
+  enabled: false
+format:
+  html:
+    theme: [litera, theme/equivalences.scss]
+    toc: true
+    toc-depth: 4
+    code-fold: true
+    title: "signals (archive)"

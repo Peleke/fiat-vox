@@ -1,0 +1,45 @@
+---
+title: "Ensembles: the Human Instrument"
+---
+
+::: {.callout-note collapse="true"}
+## Source notes (archive cell 8, unchanged)
+
+Move from waves, pitch, simple oscillators to: voices and instruments, which form ensembles". But the nature of these sounds is different; A4 sung and A4 struck on the violin are the same A4—but we don't mistake the two.
+
+Here, we introduce the concept of resonance; extend the complex exponential discussion to discuss damped (e.g., a kick drum waveform -> spiral) and driven (resonant) oscillators; the source-filter model (noise or harmonically rich sounds through filters -> vowel-like sounds); guitars, violins, same thing; tube model, vowels and formants.
+
+- Resonance and Voices
+    - Timbre and harmonics
+    - Source, filter, and voices + instruments
+    - Tube model, vowels, and formants
+:::
+
+::: {.callout-warning}
+## Plan only — backfill chapter
+Not written yet. The working tube-model outline is kept locally in `_notes/ensembles-tube-model.md`
+(not rendered). Precision note on the source notes: a violin is bowed or plucked, not struck
+(`_notes/ERRATA.md` E14).
+:::
+
+## Plan
+
+| Section | Content | hljod demo |
+|---|---|---|
+| Timbre and harmonics | Same pitch, different sources; a tone as many turning points at whole-number multiples of a base rate; the overtone series | harmonic toggler, harmonics table, overtone series (`edm-2`); square vs `gm_trumpet` on the same notes (`edm-7`) |
+| Resonance | Damped oscillation as the inward spiral; driven oscillation; a high-Q filter as a lightly damped resonator, up to self-oscillation | 808 decaying sine and decay sweep (`edm-4c`); `.lpf().lpq()` Q table (`edm-2`) |
+| Source, filter, voices + instruments | Harmonic or noisy source through filters; one bandpass ≈ one formant; a swept band sounds vowel-like | swept `.bpf()` on a sawtooth (`edm-2`); Moog oscillator → filter → amp chain |
+| Tube model, vowels, formants | Throat → tube → wave equation → quarter-wave resonances → constrictions → nomogram → two-tube estimates → Kelly–Lochbaum | Pink Trombone (link); planned OJS tube and nomogram widgets |
+
+**Suggested transition in →** from Waves' last step: one pitch from a voice is many turning points at
+multiples of a base rate.
+
+**Suggested transition out →** the tube's formants scale together with 1/length — that assumption is
+what formant normalization in Isoclines relies on, and it is also a scaling symmetry that returns in
+What's in a Wave.
+
+::: {.callout-note appearance="minimal"}
+**Plan sign-off.** Drafted by Claude (Opus 5.5) at the author's request: "we should develop a plan for
+Ensembles — but this won't get written yet." Author's input: the source notes and the tube-model arc.
+Claude's contribution: the section table, hljod demo mapping, transitions — estimate ~60%.
+:::

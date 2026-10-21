@@ -10,3 +10,8 @@ __pycache__/
 
 /.quarto/
 **/*.quarto_ipynb
+
+# Archive preview (port 4848): render output only
+/_archive-preview/*.html
+/_archive-preview/*_files/
+/_archive-preview/.quarto/

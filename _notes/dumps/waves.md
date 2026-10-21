@@ -1,0 +1,28 @@
+Adapts the below brain dump:
+
+- Periodicity is circularity & wrapping curves
+    - Now that we're in circle-land, it would be nice if we could easily move around the circle. Let's start with a nice way of writing down where we are.
+    - First: How far away from the origin are we? That's the first number. And how far around the circle are we? That's this second one: angle. Instead of "displacement over time", we have "distance from origin and angle".
+    - Next, we need to move around the circle somehow. It would be nice to be able to easily get "around", from the starting point, in ninety degree increments. It's a start.
+        - We're halfway there: We can rotate 180 degrees by just multiplying -1.
+        - But we have no way to get ninety degrees away. We know what it should look like, though: (1, 0) -> (0, 1).
+        - I mean, we're figuring it out, so let's just say we...Have that. We multipled by -1 to reflect. We don't know what would turn us around ninety degrees. Let's just say we have it; we'll call it i. For imagination.
+        - We don't know what it _is_, but we know what it does: it takes (1, 0) to (0, 1)...Somehow. 
+            - Actually, two things. First: we don't need to answer "somehow". We changed our perspective; so multiplying by -1 still flips things over, but it's because it rotates them 180. It doesn't actually mean the same thing as "reflect"; it just ends up in the same place.
+            - So we can just declare that i turns things 90 degrees; _under this perspective_, it's just the operation that does that. It's just an idea: if it turns out to break, we'll throw it away. 
+            - But, it doesn't make much sense to write (0, 1), anymore. The point (1, 0) makes sense: 1 unit of distance away, no rotations. But in (0, 1), we mean one...What? Well—if (-1, 0) is where you land after a 180 degree rotation, that's where you land after two ninety degree rotations. So (0, 1) means "one ninety degree rotation from (1, 0)", which actually _does_ make sense. 
+            - But that "1" is still weird: It looks like a scalar _number_, like the same thing as the one in (1, 0). Since the second element of the tuple represents something different entirely—_angle_—let's go ahead and say (0, 1) := (0, i). This is actually the same thing: (0, i) = (0, 1i). We're just reminding ourselves that the second element is a _rotation_, not a distance. That's all "i" does.
+            - That means we need to have: i * z = i * (1, 0) = (0, 1i). But this _still_ looks weird—it should be (i, 0), shouldn't it?
+                - _Intuitively_, the reason it isn't, is because i * z doesn't mean "multiply the numbers in z by i". It means, "take what's in z and turn it ninety degrees". That turns out to put you at x = 0, and i = 1; so, i * z = (0, i).
+        - This is kind of important. There's a big trick happening: I'm totally redefining what "multiplication" means. It's starting to look like this only works if I just make this up.
+            - Here's the thing: "multiplication" usually means "repeated addition".
+            - Here, it _does_ mean that—but it's repeated addition..._of angles_. So multiplying by -1 means: turn 180 degrees. Multiplying by i means: turn 90 degrees. Multiplying by i twice means: turn 180 degrees. Multiplying by i three times: turn 270.
+            - ...Wait. i^2 = -1. That's where that comes from: If "multiply" means "rotate", _negative square roots do make sense_. And i^3 = -i, according to our picture. and i^4 is just 1: Move 90 degrees four times, and...Well, you move nowhere. 
+            - This _still_ feels weird, but it looks...Plausible: It's at least self-consistent.
+        - Let's take a step back. When we multiply numbers, what are we doing?
+            - Well—adding, repeatedly. But adding numbers is just a way to combine them and get a new one; _or_, to associate two numbers with a new one by combining them in a specific way: It's like giving a couple a random lottery number based on their personalities...Or something.
+            - This works, and it's super intuitive. There are a few things we always expect when we multiply numbers, even if we don't think about it:
+                - The new number is always the "same kind" of number—I can't multiply whole numbers and magically get a fraction. 
+                - I can always get the old numbers back: 5 * 3 = 15. And I can always get 5 back with 15 / 3, or 3, with 15 / 5. It's not like 5 * 3 = 1♑︎◆︎♋︎♑︎♏︎5 and I have to pour a libation to the Goddesses of the Glyphs to decode it again. It's even true if the number is weird: 2 * π = 2π. I can *still* get π back, even if I can't actually write it down. The one time this isn't true is with zero: So, actually, let's leave that out. It's a black hole. It sort of doesn't mean a lot, anyway; how do you mix something with..._nothing_? It makes sense you'd get nothing, but it almost doesn't make sense, unless you think of it like a trash can to throw things away if you don't want them...
+                - There's always a way for me to say _do nothing_. We call it 1: 5 * 1 means: 5. 
+                - I can do things in either order: 5 * 3 and 3 * 5 are the same. 

@@ -1,0 +1,327 @@
+---
+title: "Interlude: Waves"
+---
+
+{{< include live/_setup.qmd >}}
+
+::: {.callout-note collapse="true"}
+## Source notes (archive cell 6, formatting only)
+
+{{< include _notes/dumps/waves.md >}}
+:::
+
+::: {.callout-warning}
+## Outline, not prose
+Scaffolding to be replaced by the author's prose. Tags per section: **Objectives** · **Narrative context** ·
+**Demo & assets** · **Precision notes** (errata from the dump are kept, with the fix) · **Suggested
+transition**. Audience: sound-inclined, not math-trained. Arc per idea: intuition → fuzzy → formal. Success
+test for the chapter: "logs turn ratios into addition" makes sense afterward to a reader for whom it did not
+before.
+:::
+
+::: {.callout-tip collapse="true"}
+## A proposed angle on the deliberate fiction (for the author)
+
+The dump starts with *(distance, angle)* and then drifts into Cartesian *(x, y)* points, which is where the
+mud comes from. Suggestion: **stay polar the whole way until shadows are needed.**
+
+- *(distance, angle)* is already the reader's intuition for something turning, so it is the honest
+  starting point, not a fiction.
+- In polar terms "multiply" means *scale the distance, add the angle*. Then −1 is *(1, half turn)*, the
+  thing called i is *(1, quarter turn)*, and i·i = −1 is just quarter + quarter = half. Nothing has to be
+  "made up"; the rule was chosen first and i falls out of it.
+- Cartesian *(x, y)* arrives later and for a stated reason: a microphone records **one shadow** of the
+  circular motion (displacement over time), and **adding** two waves is easy in shadows while
+  **multiplying** is easy in polar.
+- Payoff: "multiplying = adding angles" *is* the logarithm move. The chapter's last section (ratios →
+  steps) then feels like the same trick a second time, which is the success test above.
+
+This removes the representational switch rather than papering over it, and keeps the intuition-first order.
+:::
+
+## Periodicity Is Circularity
+
+**Objectives**
+
+- A motion that repeats can be drawn as a trip around a circle; one repeat = one turn.
+- The up-and-down of a tuning-fork tine (or a speaker cone) is the shadow of that circular motion.
+- Frequency = turns per second; this is where the word earns its definition.
+
+**Narrative context**
+
+- Callback to Space & Time: the 3:2 composite wave repeated; repeating is circling.
+- Physical anchor first (point on a turning wheel, its shadow on a wall), notation second.
+
+**Demo & assets**
+
+- OJS phasor: a point turning on a circle at an adjustable rate, with its vertical shadow traced over time
+  beside it (the sine curve drawn live). Slider: turns per second.
+- Strudel: a slow `sine` used as a tremolo so the circle's motion is audible:
+
+```{=html}
+<strudel-editor>
+<!--
+// a slow turn heard as rising and falling loudness
+note("c3").s("triangle").gain(sine.range(0, .8).slow(2))
+-->
+</strudel-editor>
+```
+
+**Precision notes**
+
+- Dump calls it "circularity & wrapping curves". Keep "wrapping" for later (the pitch circle, where octaves
+  wrap); here it is just repetition.
+
+**Suggested transition →** to move around a circle we need a way to write down *where* on it we are.
+
+::: {.callout-note appearance="minimal"}
+**Outline sign-off.** Drafted by Claude (Opus 5.5) at the author's request: "Waves and What's In a Wave
+should be populated with a thorough outline … formatted cell, and then a cleaned/first-pass-edited
+outline." Author's input: the dump's opening bullets. Claude's contribution: structure, physical anchor,
+demos — estimate ~60%.
+:::
+
+## Where Am I? Distance and Angle
+
+**Objectives**
+
+- A position on the plane as two numbers: how far out, and how far around.
+- Angles measured in turns (and later degrees/radians); a full turn returns to the start.
+
+**Narrative context**
+
+- Follows the dump: "Instead of displacement over time, we have distance from origin and angle."
+
+**Demo & assets**
+
+- OJS: drag a point; readout of (distance, angle in turns).
+
+**Precision notes**
+
+- *Erratum E1 (kept by design):* the dump next writes points as `(1, 0) → (0, 1)`, which is Cartesian, and
+  then sets `(0, 1) := (0, i)`. Mixed representations. Clean form: Cartesian `x + iy` or polar `r·e^{iθ}`;
+  `i·1 = i` is the quarter turn. See the angle proposal above for a way to avoid the switch.
+
+**Suggested transition →** with a way to name positions, ask how to *move*: turning by fixed amounts.
+
+::: {.callout-note appearance="minimal"}
+**Outline sign-off.** Drafted by Claude (Opus 5.5), same request. Author's input: the polar idea.
+Claude's contribution: separation into its own step, erratum note — estimate ~40%.
+:::
+
+## Turning by Multiplying
+
+**Objectives**
+
+- Multiplying by −1 turns by a half turn (the dump's "it doesn't mean reflect; it just ends up in the same
+  place").
+- Declare the quarter turn and call it *i*. Then *i*² = −1, *i*³ = −*i*, *i*⁴ = 1 are read off the circle.
+- Multiplication on the circle is *adding angles*.
+
+**Narrative context**
+
+- The dump's strongest beat: "if 'multiply' means 'rotate', square roots of negatives do make sense."
+  Keep the discovery order: the rule comes first, *i* is what the rule forces.
+
+**Demo & assets**
+
+- OJS: a "turn button" — multiply by *i* repeatedly; the point visits four positions and returns.
+- Optional Strudel analogue: four-step rotation of a pattern (`.rotL`/`.iter(4)`), the same quarter turns
+  heard as a rotating rhythm (links back to necklaces).
+
+**Precision notes**
+
+- *Erratum E2:* "negative square roots do make sense" → "square roots of negative numbers".
+- *Erratum E4:* "multiplication means repeated addition … of angles". For points on the unit circle,
+  multiplying adds angles; in general it multiplies distances and adds angles. "Repeated addition" is the
+  whole-number special case, not the definition.
+- The dump's line "i·z = (0, i) … shouldn't it be (i, 0)?" disappears in polar form: `i·(1, 0°) = (1, 90°)`.
+
+**Suggested transition →** we changed what multiplication means. Check that the new meaning still keeps
+the promises the old one did.
+
+::: {.callout-note appearance="minimal"}
+**Outline sign-off.** Drafted by Claude (Opus 5.5), same request. Author's input: the full argument (−1,
+i, i² = −1, i⁴ = 1). Claude's contribution: ordering, corrections, demos — estimate ~30%.
+:::
+
+## What Multiplication Promises
+
+**Objectives**
+
+- Closure: turning a point on the circle lands on the circle.
+- Identity: "do nothing" exists (1, no turn).
+- Inverses: every turn can be undone (turn back) — except by zero, which is a black hole and is left out.
+- Order of grouping doesn't matter (associativity); order of turns doesn't matter (commutativity).
+- These five promises are the whole structure; the name "group" is withheld until What's in a Wave.
+
+**Narrative context**
+
+- The dump's lottery-number and "Goddesses of the Glyphs" asides are the author's voice; keep the beat
+  (you can always get the old numbers back) and leave the jokes to the prose.
+
+**Demo & assets**
+
+- None needed; a small table of turns (quarter, half, three-quarter, full) and their products on the
+  circle is enough.
+
+**Precision notes**
+
+- *Erratum E3:* the dump's list omits **associativity**, which is what makes "turn 90°, three times"
+  unambiguous.
+- Commutativity is the one promise that will *fail* later (non-abelian groups in What's in a Wave). Flag it
+  lightly here so the later break lands.
+
+**Suggested transition →** so far every point sits on the circle (distance 1). Let distance change too.
+
+::: {.callout-note appearance="minimal"}
+**Outline sign-off.** Drafted by Claude (Opus 5.5), same request. Author's input: four of the five
+promises and the zero aside. Claude's contribution: associativity, the forward flag on commutativity —
+estimate ~30%.
+:::
+
+## Shadows: What a Microphone Sees
+
+**Objectives**
+
+- A recording is one shadow of the turning point: displacement over time.
+- The two shadows (across, up) are cosine and sine; the point is `cos θ + i·sin θ`, written `e^{iθ}`.
+- Euler's formula is introduced as *notation for "the point at angle θ"*, not derived.
+
+**Narrative context**
+
+- This is where Cartesian enters, with a reason (see the angle proposal).
+- Callback: the tuning-fork tine is a shadow.
+
+**Demo & assets**
+
+- OJS: the phasor with both shadows plotted; toggle which shadow is "recorded".
+- Link forward: the Sampling & the DFT chapter derives sine/cosine by sampling a tuning fork.
+
+**Precision notes**
+
+- Don't claim the formula is obvious; claim only that it is a name for something already drawn.
+
+**Suggested transition →** points off the unit circle: what happens when each turn also shrinks or grows.
+
+::: {.callout-note appearance="minimal"}
+**Outline sign-off.** Drafted by Claude (Opus 5.5), same request. Not in the dump; Claude's addition
+derived from the polar-first proposal — estimate ~95%.
+:::
+
+## Spirals: Decay and Growth
+
+**Objectives**
+
+- Multiplying by a number with distance < 1 turns *and* shrinks: the point spirals in. Its shadow is a
+  decaying oscillation.
+- Distance > 1 spirals out: growth without bound.
+
+**Narrative context**
+
+- Plant two later payoffs: the kick drum as a decaying spiral (Ensembles) and runaway echo (feedback delay
+  above 1) as an outward spiral.
+
+**Demo & assets**
+
+- OJS: sliders for turn per step and shrink per step; plot the spiral and its shadow.
+- Strudel, decay (`hljod:edm-4c`):
+
+```{=html}
+<strudel-editor>
+<!--
+// a sine that dies away: the shadow of an inward spiral
+note("c2").s("sine").decay("<0.08 0.3 0.6>").sustain(0)
+-->
+</strudel-editor>
+```
+
+- Strudel, runaway echo (`hljod:edm-4a`): `.delay(.5).delaytime(.25).delayfeedback(...)` near and above
+  0.9 (play quietly).
+
+**Precision notes**
+
+- hljod overstates the 808 as "the same math" as a decaying sine; the real 808 kick also sweeps pitch at
+  the start (`_notes/ERRATA.md` H5).
+
+**Suggested transition →** two turning points at once: add them.
+
+::: {.callout-note appearance="minimal"}
+**Outline sign-off.** Drafted by Claude (Opus 5.5), same request. Author's input: "damped … kick drum
+waveform → spiral" (from the Ensembles notes). Claude's contribution: placement here, demos — estimate ~80%.
+:::
+
+## Adding Turns: Beating
+
+**Objectives**
+
+- Two points turning at nearly the same rate drift in and out of line; their sum swells and fades.
+- The swell rate is the difference of the two rates (Δf).
+
+**Narrative context**
+
+- The reese bass (two detuned saws) as the audible case (`hljod:edm-2`).
+
+**Demo & assets**
+
+```{=html}
+<strudel-editor>
+<!--
+// two saws, the second detuned by 0, 0.05, 0.15, 0.3 semitone per cycle: the sum beats
+stack(
+  note("c2").s("sawtooth"),
+  note("c2").add(note("<0 0.05 0.15 0.3>")).s("sawtooth")
+).lpf(600).gain(.4)
+-->
+</strudel-editor>
+```
+
+- OJS: two phasors and their sum vector; slider for the rate difference.
+
+**Precision notes**
+
+- For rich tones, harmonic *k* beats at *k*·Δf, so upper harmonics beat faster (`_notes/ERRATA.md` H3).
+- hljod's reese detune label is wrong (H1).
+- The Strudel snippet above uses hljod's `.add(note(x))` detune form; not yet played in a browser.
+
+**Suggested transition →** we have used ratios (octave ×2, fifth 3:2) and rates throughout. Last step: why
+equal-sounding pitch steps are equal *ratios*, and how to turn ratios into steps.
+
+::: {.callout-note appearance="minimal"}
+**Outline sign-off.** Drafted by Claude (Opus 5.5), same request. Not in the dump; from the hljod sweep —
+estimate ~95%.
+:::
+
+## Ratios Into Steps
+
+**Objectives**
+
+- Equal-sounding pitch steps are equal ratios; the octave (×2) is one full turn of a *pitch circle*.
+- Turning ratios into steps is what a logarithm does: steps add when ratios multiply.
+- Twelve equal steps per octave: each step is the ratio 2^(1/12).
+- Twelve perfect fifths (3:2) overshoot seven octaves slightly: (3/2)¹² / 2⁷ ≈ 1.0136, the Pythagorean comma.
+  The chain of fifths never closes exactly.
+
+**Narrative context**
+
+- Same move as polar multiplication: multiplying turned into adding angles. Say so explicitly; it is the
+  chapter's success test.
+
+**Demo & assets**
+
+- OJS pitch circle: step around by fifths; exact 3:2 vs tempered 2^(7/12); show the gap after twelve steps.
+- Frequency table C4–C5 (`hljod:edm-8a`): spacing grows in Hz, constant in steps — this mismatch returns in
+  STFT & Spectrograms (linear bins vs mel).
+
+**Precision notes**
+
+- The fifths chain never closes because log₂ 3 is irrational (no whole numbers *a*, *b* with 3ᵃ = 2ᵇ).
+  State the fact; the proof is optional.
+
+**Suggested transition →** hand-off to Ensembles: a single pitch from a voice is not one turning point but
+many, at whole-number multiples of a base rate.
+
+::: {.callout-note appearance="minimal"}
+**Outline sign-off.** Drafted by Claude (Opus 5.5), same request. Author's input: the success-test
+sentence. Claude's contribution: content, hljod demos, the polar callback — estimate ~85%.
+:::

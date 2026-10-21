@@ -1,0 +1,320 @@
+---
+title: "Interlude: What's in a Wave?"
+---
+
+{{< include live/_setup.qmd >}}
+
+::: {.callout-note collapse="true"}
+## Source notes (archive cell 15, formatting only)
+
+{{< include _notes/dumps/whats-in-a-wave.md >}}
+:::
+
+::: {.callout-note collapse="true"}
+## Source notes (archive cells 447–449, unchanged)
+
+{{< include _notes/dumps/wiaw-shift-invariance.md >}}
+:::
+
+::: {.callout-warning}
+## Outline, not prose
+Scaffolding to be replaced by the author's prose. Tags per section: **Objectives** · **Narrative context** ·
+**Demo & assets** · **Precision notes** (errata kept with the fix; numbering matches `_notes/ERRATA.md`) ·
+**Suggested transition**. Scope decided 2026-10-21: Z₁₂ through chord progressions (no modes); reverb as
+convolution in; feedback delay in, possibly moved to an appendix; **stop at T/I = D₁₂**.
+:::
+
+## The Reveal
+
+**Objectives**
+
+- State the turn: the previous chapters were about something underneath signals, convolution, and vowels.
+
+**Narrative context**
+
+- Archive cell 447 already has the beat ("This wasn't about convolution, signal processing, neural nets,
+  or even vowels").
+- Placement: after Isoclines, so the CNN that just classified vowels is the object being explained.
+
+**Suggested transition →** start from what the CNN actually does to its input: convolution.
+
+::: {.callout-note appearance="minimal"}
+**Outline sign-off.** Drafted by Claude (Opus 5.5) at the author's request: "What's in a Wave … a formatted
+cell, and then a cleaned/first-pass-edited outline." Author's input: the beat itself. Claude's
+contribution: placement note — estimate ~10%.
+:::
+
+## Convolution You Can Hear
+
+**Objectives**
+
+- Convolution as "slide a small pattern along and add up the overlaps": moving average (smoothing) and
+  difference (edge detection) as the two first examples (archive 449).
+- **Reverb is convolution**: a dry sound convolved with a room's impulse response (the room's echo of a
+  single click) is the sound in that room.
+
+**Narrative context**
+
+- The click returns: the impulse response is literally the room's answer to Space & Time's single click.
+
+**Demo & assets**
+
+- Strudel, dry vs room (`hljod:edm-4a`):
+
+```{=html}
+<strudel-editor>
+<!--
+// the same clap, dry then in a room
+s("~ ~ ~ ~ cp ~ ~ ~").room("<0 0.6>").size(0.8)
+-->
+</strudel-editor>
+```
+
+- Python (planned): build an impulse response as exponentially decaying noise, `np.convolve` a dry
+  Hillenbrand vowel with it, play before/after; then convolve with a short moving-average kernel and
+  hear the high end dull.
+
+**Precision notes**
+
+- Strudel's `.room()` is an algorithmic reverb, not literally a convolution with a measured response; it
+  is the same idea, not the same implementation. Use numpy for the exact claim.
+
+**Suggested transition →** write the sliding-and-adding as a matrix and look at its rows.
+
+::: {.callout-note appearance="minimal"}
+**Outline sign-off.** Drafted by Claude (Opus 5.5), same request. Author's input: moving average / edge
+detection (archive 449) and "reverb as convolution is gold". Claude's contribution: the click callback,
+demo plan, precision note — estimate ~50%.
+:::
+
+## Convolution as a Matrix
+
+**Objectives**
+
+- Convolution with wrap-around is a **circulant** matrix: each row is the previous row shifted by one.
+- The shift itself is a matrix *S*; every circulant is a polynomial in it: C = Σ aᵢ Sⁱ (archive 449).
+
+**Demo & assets**
+
+- OJS: heatmap of a circulant built from an editable kernel; highlight that each row is a shift.
+- Sonified (planned, from the M4L plan): drop zero-padding and hear wrap-around as time-aliasing.
+
+**Precision notes**
+
+- Ordinary (linear) convolution is Toeplitz, not circulant; circulant is the wrap-around version. Say
+  which one each demo uses.
+
+**Suggested transition →** a polynomial in *S* commutes with *S*. That one fact carries the rest.
+
+::: {.callout-note appearance="minimal"}
+**Outline sign-off.** Drafted by Claude (Opus 5.5), same request. Author's input: the matrix
+representation and C = Σ aᵢSⁱ. Claude's contribution: the Toeplitz/circulant distinction, demos —
+estimate ~35%.
+:::
+
+## Commuting with Shifts
+
+**Objectives**
+
+- C S = S C: shifting then convolving equals convolving then shifting.
+- This is shift **equivariance**. Invariance (output unchanged by a shift) needs an extra pooling step.
+
+**Narrative context**
+
+- The CNN in Isoclines inherits this for free; the algebra, not training, gives it.
+
+**Demo & assets**
+
+- Python (planned): shift a spectrogram patch, convolve, compare with convolve-then-shift; then add
+  global max-pool and show the output stops moving.
+
+**Precision notes**
+
+- *Erratum E7:* the dump says "Shift invariance of CNNs drops out from the algebra." What drops out is
+  equivariance; invariance needs pooling.
+
+**Feedback delay (candidate for an appendix)**
+
+- An echo that feeds back: y[n] = x[n] + g·y[n − D]. As matrices: (I − g·S^D)·y = x, so
+  y = (I − g·S^D)⁻¹·x = Σ gᵏ S^{Dk} x — a geometric series of shifted copies.
+- |g| < 1 converges (echoes die away: the inward spiral from Waves); |g| > 1 diverges (runaway echo,
+  `hljod:edm-4a`'s "above 1.0 they grow louder").
+- Same commuting argument applies: the inverse of a polynomial in *S* still commutes with *S*.
+
+**Suggested transition →** if C and S commute, they share eigenvectors. Find the eigenvectors of *S*.
+
+::: {.callout-note appearance="minimal"}
+**Outline sign-off.** Drafted by Claude (Opus 5.5), same request. Author's input: "C and S commute; so
+convolution is shift equivariant" (archive 449). Claude's contribution: equivariance/invariance
+correction, the feedback-delay derivation — estimate ~55%.
+:::
+
+## What Survives a Shift
+
+**Objectives**
+
+- An eigenvector of *S* is a pattern that, shifted by one step, is the same pattern times a number.
+- Complex exponentials do this: shifting one step multiplies by a fixed turn ω^k (Waves: turning by
+  multiplying). The turns ω^k are the N-th roots of unity.
+- Collect those exponentials as columns: the (inverse) DFT matrix. It diagonalizes *S*, hence every
+  circulant at once. The convolution theorem is this sentence.
+- The eigenvalue of C on mode k is its kernel's polynomial evaluated at ω^k.
+
+**Narrative context**
+
+- This is where the tuning-fork machine from Sampling & the DFT gets its justification: the forks are
+  forced, not chosen.
+
+**Demo & assets**
+
+- Python (planned): build F for N = 8, compute F⁻¹ C F for a random circulant, show it is diagonal and
+  that the diagonal equals the DFT of the kernel.
+- OJS: roots of unity on the circle for an N slider (reuses the necklace widget's geometry).
+
+**Precision notes**
+
+- *Erratum E5:* the dump says the eigenvectors "are precisely the complex roots of unity". The roots of
+  unity are the **eigenvalues of S**; the eigenvectors are the Fourier modes (1, ω^k, ω^{2k}, …).
+- *Erratum E6:* "what kind of function is identical under shift, up to scale? … Sinusoids." **Complex
+  exponentials**; a real sine shifted is a mix of sine and cosine, not a multiple of itself.
+- *Erratum E13:* archive 449 says "the roots of the polynomial defining C correspond to the roots of
+  unity". The eigenvalues of C are the polynomial **evaluated at** the roots of unity.
+- *Erratum E8:* F has orthogonal columns of length √N; F/√N is unitary.
+- *Erratum E11:* "complex exponentials are the only functions that satisfy this (proof?)". True as
+  simultaneous eigenvectors of all shifts (characters of the group); sketch: f(t + s) = λ(s) f(t) forces
+  λ to turn sums into products, hence exponential.
+
+**Suggested transition →** draw what the shift does to the N positions.
+
+::: {.callout-note appearance="minimal"}
+**Outline sign-off.** Drafted by Claude (Opus 5.5), same request. Author's input: the full argument
+(archive 449 and the dump). Claude's contribution: corrections, the tuning-fork tie, demos — estimate ~35%.
+:::
+
+## The Shape of a Shift
+
+**Objectives**
+
+- Positions 0 … N−1 joined by "shift by one" form a cycle: the Cayley graph of Z_N with generator 1.
+- A circulant whose kernel uses offsets {d₁, d₂, …} draws the Cayley graph with those generators.
+- The roots of unity sit on this polygon; the rhythm necklace from Space & Time is the same picture.
+
+**Narrative context**
+
+- Name the structure now: the five promises from Waves (closure, identity, inverses, associativity,
+  commutativity) define a **group**; Z_N is the group of rotations of the N-gon.
+
+**Demo & assets**
+
+- OJS: Cayley graph of Z_N with a selectable generator set (offsets), drawn on the necklace circle.
+
+**Precision notes**
+
+- The symmetry of the drawing is the group acting on itself; say "regular action" once, in a footnote.
+
+**Suggested transition →** take one group and work it all the way through, with music the reader knows:
+the twelve pitch classes.
+
+::: {.callout-note appearance="minimal"}
+**Outline sign-off.** Drafted by Claude (Opus 5.5), same request. Author's input: "It's the Cayley graph of
+a cyclic group." Claude's contribution: generator-set generalisation, necklace callback, where to name
+"group" — estimate ~55%.
+:::
+
+## Z₁₂, Worked Through Chord Progressions
+
+**Objectives**
+
+- Pitch classes as Z₁₂ (C = 0 … B = 11); octave equivalence is the wrap-around from Waves' pitch circle.
+- Transposition by k = adding k mod 12: the group acting on chords. A progression moved to a new key is
+  the same progression.
+- **Fifths generate Z₁₂.** Stepping by 7 visits all twelve classes because gcd(7, 12) = 1: the circle of
+  fifths.
+- Root motion by fifths drives progressions: ii–V–I is two steps on the circle (D → G → C).
+- **The tritone (6) is the unique element of order 2**: T₆ applied twice is the identity. The dominant
+  seventh's guide tones (e.g. B and F in G7) form a tritone, and T₆ swaps them, so the pair is unchanged.
+  That is why the **tritone substitution** (G7 → D♭7) keeps the voice-leading that resolves to C.
+- Subgroups as symmetric chords: {0, 4, 8} (augmented, order 3), {0, 3, 6, 9} (diminished seventh,
+  order 4), {0, 6} (tritone, order 2) — the same 2/3/4 divisions of 12 as the Ewe bell in Space & Time.
+
+**Narrative context**
+
+- Every claim is audible; play the progression, its transposition, and the tritone substitution.
+- No modes or scale comparisons here (the music-only track covers those).
+
+**Demo & assets**
+
+```{=html}
+<strudel-editor>
+<!--
+// ii–V–I in C, then with the tritone substitute for V
+note("<[d3,f3,a3,c4] [g2,b3,d4,f4] [c3,e3,g3,b3] [d3,f3,a3,c4] [db3,b3,eb4,f4] [c3,e3,g3,b3]>")
+  .s("triangle").gain(.5)
+-->
+</strudel-editor>
+```
+
+- OJS: twelve-class circle; select a chord; buttons for T₁, T₇ (one step on the circle of fifths) and T₆;
+  draw the chord as a polygon (`hljod:edm-4b` "a chord is a shape on a circle").
+- Optional one-liner: |DFT| of a pitch-class set is unchanged by transposition (Quinn; Amiot 2016) —
+  the Fourier modes from the previous sections, applied to chords. Keep to a sentence or omit.
+
+**Precision notes**
+
+- hljod states ii–V–I as "three steps" on the circle; it is two (`_notes/ERRATA.md` H13).
+- hljod reverses the overtone claim: the tonic's overtone series contains the dominant (3rd harmonic),
+  not the other way round (H14).
+- Voicing in the Strudel sketch (G7 as G2–B3–D4–F4, D♭7 as D♭3–B3–E♭4–F4 with B = C♭) is illustrative and
+  not checked by ear.
+
+**Suggested transition →** transposition moves a chord around the circle. Flip it instead.
+
+::: {.callout-note appearance="minimal"}
+**Outline sign-off.** Drafted by Claude (Opus 5.5), same request. Author's input: "frame in terms of chord
+progressions (generate by fifths, tritone as order-2)". Claude's contribution: the tritone-substitution
+argument, subgroups-as-chords, Ewe callback, demos — estimate ~75%.
+:::
+
+## When Order Matters: T/I and the Dihedral Group
+
+**Objectives**
+
+- Inversion Iₙ(x) = n − x mod 12 flips a chord across an axis on the circle. A major triad inverted is a
+  minor triad (the major/minor "triangle flip", `hljod:edm-4b`).
+- Transpositions and inversions together form the T/I group, which is D₁₂, the symmetries of the
+  regular 12-gon (rotations + reflections).
+- **The promise that breaks:** T and I do not commute (I ∘ Tₖ = T₋ₖ ∘ I). This is the first group in the
+  book where order matters — the commutativity flag planted in Waves.
+- Stop here: D₁₂ is the same polygon as the roots of unity and the Cayley graph, now with flips.
+
+**Narrative context**
+
+- Ending on a broken promise sets up everything after the book's turn to graphs: when the symmetries
+  don't commute, one Fourier basis can no longer diagonalize everything at once.
+
+**Demo & assets**
+
+- OJS: the twelve-class circle with a reflection-axis slider; show T₇ then I versus I then T₇ landing on
+  different chords.
+- Strudel: C major, its inversion (a minor triad), and T/I applied in both orders.
+
+**Precision notes (for the forward pointer only; not written in this chapter)**
+
+- *Erratum E9:* "parameterize Z_n, replacing it with any group whose action commutes with circulant
+  matrices". Replace Z_n by a group G; the linear maps commuting with G's action are exactly the
+  G-convolutions (Kondor & Trivedi 2018).
+- *Erratum E10:* Z gives the DTFT/Fourier series and R the Fourier transform; the z-transform extends the
+  DTFT off the unit circle rather than being a separate group case.
+- *Erratum E12:* "symmetry group" → **symmetric group** S_n; the smallest non-abelian case is S₃ — and
+  D₁₂ (above) is already non-abelian, so the book may not need S_n at all to make the point.
+- Non-commuting ⇒ block-diagonalization by irreducible representations instead of diagonalization:
+  name it as the next step, don't develop it.
+
+**Suggested transition out →** the book's next part: graphs, where the symmetry group is permutations,
+and this is where geometric deep learning starts.
+
+::: {.callout-note appearance="minimal"}
+**Outline sign-off.** Drafted by Claude (Opus 5.5), same request. Author's input: "the note on T/I and
+the dihedral group is a perfect stopping point". Claude's contribution: the non-commutation as the
+payoff of Waves' flag, D₁₂ as sufficient for the non-abelian point, corrections — estimate ~70%.
+:::
