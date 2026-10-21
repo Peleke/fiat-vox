@@ -33,6 +33,7 @@ Study the [Noumida result](https://pubs.aip.org/asa/jasa/article-abstract/159/4/
 Extend PyG with DP methods implementing Aironi's feature extraction; augment Bermant's CNN architecture; build a Noumida et al.-inspired GAN; test it against Bermant's benchmarks.
 
 The goal is, explicitly, _not_ to achieve a breakthrough result. Instead, it's to demonstrate how to
+
 - Read and implement methods from research
 - Build and execute novel models
 - _Hopefully_ demonstrate an improvement

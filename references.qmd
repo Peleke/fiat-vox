@@ -6,6 +6,7 @@ title: "References"
 
 
 LATER
+
 - [Source Filter](https://github.com/laic/uoe_speech_processing_course/blob/master/signals/signals-lab-2/signals-2-source-filter.ipynb), might not be relevant
 - [Formant filtering](https://ccrma.stanford.edu/~jos/fp/Formant_Filtering_Example.html), maybe not relevant
 - [Poles and Zeros](https://web.mit.edu/2.14/www/Handouts/PoleZero.pdf)
