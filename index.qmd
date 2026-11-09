@@ -23,14 +23,14 @@ I'm not an academic, nor in any way an expert on animal communications. But I kn
   - **[Part II](06-hillenbrand-2-logreg.ipynb)**: We use `sklearn` to fit a baseline `LogisticRegression` model to the tabular formant frequency data, serving as a baseline against later work.
   - **Part III**: We transition to PyTorch, initially using it to replicate Part II's model as a Fully Connected Layer/Softmax architecture. After implementing a series of custom `nn.Module` implementations, we implement MLPs; CNNs; and a ResNet34 architecture, training each on the Mel spectrograms of the Hillenbrand vowel data.
 
-There's a vast gap between ResNet34, by now more than a decade old, and frontier deep learning. But this gives us everything necessary to learn the rest just-in-time.
+There's a veritable chasm between ResNet34, by now more than a decade old, and frontier deep learning. But this gives us everything necessary to learn the rest just-in-time.
 
 ---
 
 **Arc II** sweeps the literature:
 
 - **Coda Classification with CNNs & RNNs**: We study [Bermant et al.'s result from 2019](https://www.nature.com/articles/s41598-019-48909-4), in which they used a CNN to detect sperm whale echolocation clicks, and an RNN to classify coda types. We'll reproduce their results with our own PyTorch implementations.
-- **Combinatorial Complexity of Sperm Whale Communications**: Deep learning on codas has exploded since 2019: Coda complexity is known to be radically more complex than then-assumed. We review the most recent knowledge on the matter by reading: 
+- **Combinatorial Complexity of Sperm Whale Communications**: Deep learning on codas has exploded since 2019: Coda complexity is radically greater than previously assumed. We review the most recent knowledge on the matter by reading: 
   - Beguš et al. on [the phonology of sperm whale coda vowels](https://royalsocietypublishing.org/rspb/article/293/2069/20252994/481340/The-phonology-of-sperm-whale-coda-vowels); [vowel- and diphthong-like spectral patterns in sperm whale codas](https://direct.mit.edu/opmi/article/doi/10.1162/OPMI.a.252/133906/Vowel-and-Diphthong-Like-Spectral-Patterns-in)
   - Sharma et al.'s results on the [unexpected combinatorial complexity of sperm whale coda types](https://www.nature.com/articles/s41467-024-47221-8)
   - Gubnitsky et al. on [Automatic detection and annotation of eastern Caribbean sperm whale codas](https://pubmed.ncbi.nlm.nih.gov/40229467/); Gero et al. on [Evidence for the influence of shipping underwater radiated noise on sperm whale coda structure](https://escholarship.org/uc/item/8mj8t9h7); and a discussion on the challenges of hydroacoustics, environmental concerns, and the social dynamics of sperm whale clans.  
