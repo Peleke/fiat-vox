@@ -1,0 +1,110 @@
+---
+title: "Sounds & Voices"
+---
+
+{{< include live/_setup.qmd >}}
+
+::: {.callout-note}
+## Outline: chapter in progress
+This chapter is not written yet. The outline below lists its sections and what each will cover.
+:::
+
+<!-- generated (Claude), 2026-11-09: outline scaffold assembled from 01-space-time.qmd,
+02-waves.qmd, and 03-ensembles.qmd (now out of the chapter list). Section intros are the author's;
+the Waves headings/descriptions, the oscillator demo (OJS) and the Strudel blocks are generated. -->
+
+## Space & Time: Silence, Sound, & Rhythm
+
+There's something primal about music, and rhythm in particular. We begin by listening to the simplest -- drums -- and learn that, as low-frequency sounds, they make us feel like moving is because we feel them moving us. We'll make a few beats with rhythm necklaces and Euclidean rhythms -- but as the tempo rises, it stops being about rhythm and instead becomes pitch.
+
+Play a few in Strudel (`bd(k,n)` is the Euclidean rhythm $E(k, n)$):
+
+```{=html}
+<strudel-editor>
+<!--
+// tresillo E(3,8), cinquillo E(5,8), and E(7,16) layered
+stack(
+  s("bd(3,8)"),
+  s("rim(5,8,2)"),
+  s("hh(7,16)").gain(.6)
+)
+-->
+</strudel-editor>
+```
+
+Speed one up until it stops being a rhythm. At the default tempo one cycle lasts 2 s, so 128 clicks per cycle is 64 clicks per second, heard as a low pitch:
+
+```{=html}
+<strudel-editor>
+<!--
+// 2, 4, 8 ... 256 clicks per second: rhythm turns into pitch
+s("rim*<4 8 16 32 64 128 256 512>").gain(.5)
+-->
+</strudel-editor>
+```
+
+## Waves
+
+When a beat becomes too fast to count, we hear it like pitch. To understand it, we'll need to study waves.
+
+```{ojs}
+//| echo: false
+viewof f = Inputs.range([0.25, 3], {step: 0.05, value: 1, label: "turns per second f"})
+viewof gamma = Inputs.range([0, 1.5], {step: 0.05, value: 0.3, label: "damping γ"})
+```
+
+```{ojs}
+//| echo: false
+oscillator = {
+  const T = 4;                                   // seconds shown
+  const t = ((now / 1000) % T);                  // animation clock
+  const ts = d3.range(0, T + 1e-9, T / 400);
+  const z = s => [Math.exp(-gamma * s) * Math.cos(2 * Math.PI * f * s),
+                  Math.exp(-gamma * s) * Math.sin(2 * Math.PI * f * s)];
+  const path = ts.map(s => ({s, re: z(s)[0], im: z(s)[1]}));
+  const past = path.filter(d => d.s <= t);
+  const [re, im] = z(t);
+  const ink = "#4a4843", red = "#9a2520", grid = "#d9cfbf";
+  const circle = Plot.plot({
+    width: 300, height: 300, aspectRatio: 1,
+    x: {domain: [-1.1, 1.1], label: "shadow (what a microphone records)"},
+    y: {domain: [-1.1, 1.1], label: null},
+    marks: [
+      Plot.line(path, {x: "re", y: "im", stroke: grid, strokeWidth: 1.5}),
+      Plot.line(past, {x: "re", y: "im", stroke: red, strokeWidth: 2}),
+      Plot.link([{x1: 0, y1: 0, x2: re, y2: im}], {x1: "x1", y1: "y1", x2: "x2", y2: "y2", stroke: ink}),
+      Plot.link([{x1: re, y1: im, x2: re, y2: -1.1}], {x1: "x1", y1: "y1", x2: "x2", y2: "y2", stroke: ink, strokeDasharray: "3,3"}),
+      Plot.dot([{re, im}], {x: "re", y: "im", r: 6, fill: red, stroke: "#fdfcfa", strokeWidth: 2})
+    ]
+  });
+  const trace = Plot.plot({
+    width: 420, height: 300,
+    x: {domain: [0, T], label: "time (s)"},
+    y: {domain: [-1.1, 1.1], label: "x(t)"},
+    marks: [
+      Plot.ruleY([0], {stroke: grid}),
+      Plot.line(path, {x: "s", y: "re", stroke: grid, strokeWidth: 1.5}),
+      Plot.line(past, {x: "s", y: "re", stroke: red, strokeWidth: 2}),
+      Plot.dot([{s: t, re}], {x: "s", y: "re", r: 6, fill: red, stroke: "#fdfcfa", strokeWidth: 2})
+    ]
+  });
+  return htl.html`<div style="display:flex; flex-wrap:wrap; gap:1rem; align-items:flex-end">${circle}${trace}</div>`;
+}
+```
+
+- **Periodicity Is Circularity**: A repeating signal described as something turning.
+- **Where Am I? Distance and Angle**: Polar coordinates as the starting point.
+- **Turning by Multiplying**: Multiplication as scaling the distance and adding the angle; $i$ as a quarter turn.
+- **What Multiplication Promises**
+- **Shadows: What a Microphone Sees**: A recording is one projection of circular motion; Cartesian coordinates enter here.
+- **Spirals: Decay and Growth**: Damped and growing oscillation.
+- **Adding Turns: Beating**
+- **Ratios into Steps**: Logarithms turn ratios into addition.
+<!--
+## Ensembles: the Human Instrument
+
+- **Timbre and harmonics.** Same pitch, different sources; the overtone series.
+- **Resonance.** Damped and driven oscillation; a high-Q filter as a resonator.
+- **Source, filter, voices and instruments.** A harmonic or noisy source through filters; one bandpass ≈ one formant.
+- **Tube model, vowels, and formants.** Quarter-wave resonances, constrictions, the nomogram, two-tube estimates, Kelly–Lochbaum.
+-->

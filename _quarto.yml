@@ -3,20 +3,18 @@ project:
   output-dir: _book
 
 book:
-  title: "Equivalences"
+  title: "Fiat Vox"
   author: "Peleke Sengstacke"
   repo-url: https://github.com/Peleke/equivalences
   repo-actions: [source, issue]
   chapters:
     - index.qmd
-    - 01-space-time.qmd
-    - 02-waves.qmd
-    - 03-ensembles.qmd
+    - 01-sounds-voices.qmd
     - 04-sampling-dft.ipynb
     - 05-stft-spectrograms.ipynb
-    - 06-isoclines.ipynb
-    - 07-whats-in-a-wave.qmd
-    - 08-what-odin-knew.qmd
+    - 06-hillenbrand-1.ipynb
+    - 06-hillenbrand-2-logreg.ipynb
+    # - 06-hillenbrand-3-torch.ipynb  # hidden until the Torch/CNN/ResNet sections are written
   appendices:
     - references.qmd
 

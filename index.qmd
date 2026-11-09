@@ -1,3 +1,36 @@
-# Preface {.unnumbered}
+# Towards Modern Linguistics
 
-A journey from silence; to sound; through speech; to intelligence, cetacean and artificial; language; and space.
+It's an awkward time for human exceptionalism: I hear AI's popping bubbles and that math belongs to the machines, now.
+
+Unsatisfied with only catastrophic displacement of the species, it also seems to be keen on telling us that we _might_ just be late to language: Maybe [whales have it too](https://royalsocietypublishing.org/rspb/article/293/2069/20252994/481340/The-phonology-of-sperm-whale-coda-vowels).
+
+## Our Path
+
+Science is barreling towards the question of animal linguistics, but the space remains incipient: the tools are new, awareness is sparse, and the knowledge still scattered.
+
+This draft aims to bring you up to speed, sketching the tools and background required to approach linguistics as a quantitatively rigorous natural science, with both human and animal communications considered not hierarchically, but as instances of a more general, information theoretic phenomenon. We'll find, in the end, that we were always mistaken to think otherwise—and that the rabbit hole runs deeper, still.
+
+We'll start from the very beginning, but make our way through the seminal papers, and ultimately to the vanguard of interpretability and animal linguistics. We might still disagree at the end of it. But by then you'll know how to prove me wrong, and I'll invite it.
+
+---
+
+**Arc I** establishes foundations. It's intended to be self-contained; by the end, you'll have met all the math, linguistics, and deep learning required to review the literature. 
+
+- **Space & Time**: [Human language doesn't require speech](https://en.wikipedia.org/wiki/Sign_language), but we start with sound: impulse, rhythm, pitch, and beat.
+- **Vowels & Voices**: Then, phonetics: [vowels](https://en.wikipedia.org/wiki/Vowel); the [source-filter model](https://en.wikipedia.org/wiki/Source–filter_model); and just enough about [consonants](https://en.wikipedia.org/wiki/Consonant) to study both Sanskrit and orcas.
+- **Signals & the DFT**: Next, a detour to derive the [Discrete Fourier Transform](https://en.wikipedia.org/wiki/Discrete_Fourier_transform); implement the [STFT](https://en.wikipedia.org/wiki/Short-time_Fourier_transform); and explore [Mel spectrograms](https://docs.pytorch.org/audio/main/generated/torchaudio.transforms.MelSpectrogram.html).
+- **Formant Classification**: We study the classic [Hillenbrand vowel data](https://pubmed.ncbi.nlm.nih.gov/7759650/), giving us an opportunity to explore [formant normalization](https://marissabarlaz.github.io/portfolio/vowelnormalization/). Technically, we fit a logistic regression to the tabular formant frequency data, and CNNs to Mel spectrograms.
+
+**Arc II** sweeps the literature:
+
+- **Coda Classification with CNNs & RNNs**: We study [Bermant et al.'s result from 2019](https://www.nature.com/articles/s41598-019-48909-4), in which they used a CNN to detect sperm whale echolocation clicks, and an RNN to classify coda types. We'll reproduce their results to get more practice with CNNs; introduce RNNs; and explore the geometric relationship between the two architectures.
+- **Combinatorial Complexity of Sperm Whale Communications**: Research on codas has exploded since Bermant et al.'s original result. We review the work of Beguš et al. on [the phonology of sperm whale coda vowels](https://royalsocietypublishing.org/rspb/article/293/2069/20252994/481340/The-phonology-of-sperm-whale-coda-vowels) and [vowel- and diphthong-like spectral patterns in sperm whale codas](https://direct.mit.edu/opmi/article/doi/10.1162/OPMI.a.252/133906/Vowel-and-Diphthong-Like-Spectral-Patterns-in), as well as Sharma et al.'s results on the [unexpected combinatorial complexity of sperm whale coda types](https://www.nature.com/articles/s41467-024-47221-8). 
+- **Spectrogram-derived Graph Representations for Audio Deep Learning**: Aironi et al. introduce the use of [dynamic programming to create graph representations of spectrograms](https://www.researchgate.net/publication/356882670_Graph-based_Representation_of_Audio_signals_for_Sound_Event_Classification), which we use to explore characterizations of different coda types.
+- **BirdNET/Xeno-canto Performance Beat with GNNs**: We review the work of Noumida & Rajan, which applied Aironi's methods to [augment BirdNET and produce a claimed SOTA-result on the Xeno-canto dataset](https://pubs.aip.org/asa/jasa/article-abstract/159/4/3598/3387731/Spectrogram-derived-graphs-and-inductive-learning?redirectedFrom=fulltext).
+- **Graph-augmented Coda Classification**: We revisit Bermant et al.'s 2019 architecture, augmenting it with spectrogram-derived graphs. This is a novel approach and tooling is sparse, so we'll take a quick detour into software engineering to extend [PyTorch Geometric](https://pytorch-geometric.readthedocs.io/en/latest/) with new utilities for working with audio.
+
+**Arc III** will introduce [mechinterp](https://arena-chapter1-transformer-interp.streamlit.app) in the context of Beguš's [early work on GANs](https://arxiv.org/abs/2006.03965); [WhAM](https://arxiv.org/abs/2512.02206); and recent work on interpretability of deep audio, bioacoustics, and soundscape models. We'll use this insight alongside the skills built in Arc II to begin studying the dynamics and combinatorial properties of sperm whale, orca, and corvid communications, bringing us to the frontiers of statistical modeling in animal linguistics.
+
+---
+
+Settle in. When you're ready, our journey starts with sound.

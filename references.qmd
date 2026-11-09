@@ -2,23 +2,14 @@
 title: "References"
 ---
 
-- https://pmc.ncbi.nlm.nih.gov/articles/PMC6002811/#S27
-
-
-LATER
-
-- [Source Filter](https://github.com/laic/uoe_speech_processing_course/blob/master/signals/signals-lab-2/signals-2-source-filter.ipynb), might not be relevant
-- [Formant filtering](https://ccrma.stanford.edu/~jos/fp/Formant_Filtering_Example.html), maybe not relevant
-- [Poles and Zeros](https://web.mit.edu/2.14/www/Handouts/PoleZero.pdf)
-- [Wikibooks ish](https://en.wikibooks.org/wiki/Signals_and_Systems)
-- [All-pole Modeling of Degraded Speech](https://dsp-group.mit.edu/wp-content/uploads/2024/11/allpole_1978.pdf)
-- [Speech Production slides](https://courses.grainger.illinois.edu/ece417/fa2017/ece417fa2017lecture8.pdf)
-- [More source filter](https://www.phon.ox.ac.uk/source_filter_model)
-- [Tube Model](https://ocw.mit.edu/courses/24-915-linguistic-phonetics-fall-2015/8f4e9d5d8ea634dbbf0e2da8b92675ea_MIT24_915F15_lec4.pdf)
-- [LPC, for later](https://ccrma.stanford.edu/~hskim08/lpc/)
-- [Biquad filter](https://www.mathworks.com/help/dsphdl/ref/biquadfilter.html)
-- [Siemens](https://community.sw.siemens.com/s/article/introduction-to-filters-fir-versus-iir)
-- [Haskell school of music, don't forget](https://www.cs.yale.edu/homes/hudak/Papers/HSoM.pdf)
-- [Formant notes](https://home.cc.umanitoba.ca/~krussll/phonetics/acoustic/formants.html)
-- [Formant notes mroe](https://corpus.eduhk.hk/english_pronunciation/index.php/2-2-formants-of-vowels/)
-- [Formant notes synth style](https://www.reasonstudios.com/news/post/thor-demystified-17-filters-pt-5-formant-filters)
+1. J. Hillenbrand, L. A. Getty, M. J. Clark, and K. Wheeler, "Acoustic characteristics of American English vowels," *J. Acoust. Soc. Am.*, vol. 97, no. 5, pt. 1, pp. 3099–3111, May 1995, doi: [10.1121/1.411872](https://doi.org/10.1121/1.411872).
+2. G. E. Peterson and H. L. Barney, "Control methods used in a study of the vowels," *J. Acoust. Soc. Am.*, vol. 24, no. 2, pp. 175–184, Mar. 1952, doi: [10.1121/1.1906875](https://doi.org/10.1121/1.1906875).
+3. P. Ladefoged and K. Johnson, *A Course in Phonetics*, 6th ed. Boston, MA: Wadsworth, 2011.
+4. B. H. Story and K. Bunton, "Formant measurement in children's speech based on spectral filtering," *Speech Commun.*, vol. 76, pp. 93–111, Feb. 2016, doi: [10.1016/j.specom.2015.11.001](https://doi.org/10.1016/j.specom.2015.11.001).
+5. P. Ladefoged and D. E. Broadbent, "Information conveyed by vowels," *J. Acoust. Soc. Am.*, vol. 29, no. 1, pp. 98–104, Jan. 1957, doi: [10.1121/1.1908694](https://doi.org/10.1121/1.1908694).
+6. M. Barlaz, "Vowel Normalization in R," n.d. [Online]. Available: <https://marissabarlaz.github.io/portfolio/vowelnormalization/>
+7. F. J. Harris, "On the use of windows for harmonic analysis with the discrete Fourier transform," *Proc. IEEE*, vol. 66, no. 1, pp. 51–83, 1978.
+8. P. Adank, R. van Hout, and R. Smits, "An acoustic description of the vowels of Northern and Southern Standard Dutch," *J. Acoust. Soc. Am.*, vol. 116, no. 3, pp. 1729–1738, Sep. 2004, doi: [10.1121/1.1779271](https://doi.org/10.1121/1.1779271).
+9. <https://www.isca-archive.org/interspeech_2021/heeringa21_interspeech.pdf>
+10. <https://pubmed.ncbi.nlm.nih.gov/32538265/>
+11. <https://arxiv.org/pdf/1906.02590>
