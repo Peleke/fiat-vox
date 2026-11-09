@@ -37,6 +37,16 @@ CHAPTERS = [
 ]
 REFERENCES = "## References"
 
+# Full entries for the source notebook's placeholder links (supplied by the author, 2026-11-09).
+CITATIONS = {
+    "https://www.isca-archive.org/interspeech_2021/heeringa21_interspeech.pdf":
+        'W. Heeringa and H. Van de Velde, "A new vowel normalization for sociophonetics," in *Proc. Interspeech 2021*, Brno, Czechia, Aug. 2021, pp. 4024–4028, doi: 10.21437/Interspeech.2021-1846.',
+    "https://pubmed.ncbi.nlm.nih.gov/32538265/":
+        'W. Rankinen and K. de Jong, "The entanglement of dialectal variation and speaker normalization," *Lang. Speech*, vol. 64, no. 1, pp. 181–202, Mar. 2021, doi: 10.1177/0023830920929379.',
+    "https://arxiv.org/pdf/1906.02590":
+        'B. Ghojogh and M. Crowley, "Linear and quadratic discriminant analysis: Tutorial," arXiv:1906.02590.',
+}
+
 
 def locate(cells, prefix):
     hits = [i for i, c in enumerate(cells)
@@ -55,6 +65,11 @@ def clean_reference_cell(cell):
     text = src(cell).split("\nUnused (?)")[0].rstrip() + "\n"
     text = text.replace("CITATION NEEDED: ", "")
     text = text.replace("1. Hillenbrand, L. A. Getty", "1. J. Hillenbrand, L. A. Getty")
+    for line, full in CITATIONS.items():
+        text = text.replace(line, full)
+    if "\n10. " in text:  # 10 and 11 are not cited in the text: list them as further reading
+        head, tail = text.split("\n10. ", 1)
+        text = head.rstrip() + "\n\n**Further reading**\n\n- " + tail.replace("\n11. ", "\n- ")
     return {**cell, "source": text}
 
 

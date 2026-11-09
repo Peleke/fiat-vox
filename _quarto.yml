@@ -5,11 +5,11 @@ project:
 book:
   title: "Fiat Vox"
   author: "Peleke Sengstacke"
-  repo-url: https://github.com/Peleke/equivalences
+  repo-url: https://github.com/Peleke/fiat-vox
   repo-actions: [source, issue]
   chapters:
     - index.qmd
-    - 01-sounds-voices.qmd
+    # - 01-sounds-voices.qmd  # hidden until the Act I descriptions are rewritten
     - 04-sampling-dft.ipynb
     - 05-stft-spectrograms.ipynb
     - 06-hillenbrand-1.ipynb
